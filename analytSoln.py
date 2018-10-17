@@ -4,10 +4,12 @@
 #
 
 #Imports
+
 import os
 import numpy as np
 import math
-import matplotlib.pyplot as plt
+from utilities import expDecay as expDecay
+from utilities import lamda as lamda
 
 
 #Class initialization for solution
@@ -24,9 +26,8 @@ import matplotlib.pyplot as plt
 Class AnalytDecaySolution:
 
 	def __init__(self, halfLife, initNum, tf):
-
-		lamda = halflife.copy()
-		for x in np.nditer(lamda, op_flags['readwrite']):
-			x[...] = (math.log(2))/x
+		lamda = lamda(halfLife)
+		
+		
 
 	return atoms
