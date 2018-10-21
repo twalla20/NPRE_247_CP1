@@ -12,32 +12,43 @@ from utilities import expDecay as eD
 from utilities import decayConst as dC
 
 
-#Module initialization for analytical solution
+#Function initialization for analytical solution
 #
 #Args:
-#	hL:	array containing half lives of all three nuclides
-#	N0:	array containing initial number of nucleons for 
-#			for each nuclide
-#	tf:		total time elapsed
+#	hL:	list containing half lives of all three nuclides
+#	N0:	list containing initial number of nucleons for 
+#		for each nuclide
+#	tf:	total time elapsed
 #
 #Returns:
-#	atoms: array containg NAf, NBf and NCf
+#	Nf: list containg NAf, NBf and NCf
 
-def analytSoln(hL, N0, tf):
-	atoms = []
-	lambda = dC(hL)
+def aSol(hL, N0, tf):
+	"""
+	Function initialization for analytical solution
 	
-#Appends list with final number of parent nuclides
-	atoms.append(eD(hL[0]), N0[0], tf)
+	Args:
+		hL:     list containing half lives of all three nuclides
+		N0:     list containing initial number of nucleons for
+			for each nuclide
+		tf:     total time elapsed
+		
+	Returns:
+		Nf: list containg NAf, NBf and NCf
+	"""
+	
+#Creates list of decay constants
+	L = dC(hL)
+	
+#Computes final number of parent nuclides
+	NAf = eD(hL[0], N0[0], tf)
  
-#Appends list with final number of 1st daughter nuclides
-	Nd1 = eD(hL[1]) + (lambda[0]*N0[0]*(math.exp(-lambda[0]*tf) - math.exp(-lambda[1]*tf)))/(lambda[1]-lambda[0])
-	atoms.append(Nd1)
+#Computes final number of 1st daughter nuclides
+	NBf = eD(hL[1], N0[1], tf) + (L[0]*N0[0]*(math.exp(-L[0]*tf) - math.exp(-L[1]*tf)))/(L[1]-L[0])
 
-#Appends list with final number of stable daughter nuclides	
-	Nd2 = N0[2] + N0[1](1 - math.exp(-lambda[1]*tf)) + (N0[0]*(lambda[1]*(1 - math.exp(-lambda[0]*tf)) - lambda[0]*(1 - math.exp(-lambda[1]*tf)))/(lambda[1] - lambda[0])
-	atoms.append(Nd2)
+#Computes final number of stable (2nd daughter) nuclides	
+	NCf = N0[2] + N0[1]*(1 - math.exp(-L[1]*tf)) + (L[1]*(1 - math.exp(-L[0]*tf)) - L[0]*(1 - math.exp(-L[1]*tf)))*(N0[0]/(L[1]-L[0]))
 
-	return atoms
+	return [int(NAf), int(NBf), int(NCf)]
 
-#End of analySoln module
+#End of analySoln function

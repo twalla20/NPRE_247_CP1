@@ -1,7 +1,6 @@
 #author@ twalla20
 #
-#This file will contain utilities such as the exponential decay method and
-#the forward differencing solver.
+#This file will contain mathematical utilities used throughout the solutions
 #
 
 import os
@@ -9,18 +8,18 @@ import numpy as np
 import math
 
 
-def expDecay(tH, N0, tf):
+def expDecay(hL, N0, tf):
 	"""Model of exponential decay function.
 	Args:
-		tH:	half life of nuclide (hours)
+		hL:	half life of nuclide (hours)
 		N0:	intial number of atoms
 		tf:	final time (hours)
 	Returns number of atoms at some final time tf.
 	"""
 
-	return N0*math.exp(-(math.log(2)*tf)/tH)
+	return N0*math.exp(-(math.log(2)*tf)/hL)
 
-#end of expDecay module
+#end of expDecay function
 
 def decayConst(halfLife):
 	"""Converts array of half-lives to array of decay constants.
@@ -34,4 +33,4 @@ def decayConst(halfLife):
 	k = [math.log(2)/halfLife[i] for i in range(0, len(halfLife))]
 	return k
 
-#end of lambda module	 
+#end of decay constant function	 
