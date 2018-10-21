@@ -37,18 +37,21 @@ def aSol(hL, N0, tf):
 		Nf: list containg NAf, NBf and NCf
 	"""
 	
-#Creates list of decay constants
-	L = dC(hL)
+	if hL[0] == hL[1]:
+		return N0
+	else:
+		#Creates list of decay constants
+		L = dC(hL)
 	
-#Computes final number of parent nuclides
-	NAf = eD(hL[0], N0[0], tf)
+		#Computes final number of parent nuclides
+		NAf = eD(hL[0], N0[0], tf)
  
-#Computes final number of 1st daughter nuclides
-	NBf = eD(hL[1], N0[1], tf) + (L[0]*N0[0]*(math.exp(-L[0]*tf) - math.exp(-L[1]*tf)))/(L[1]-L[0])
+		#Computes final number of 1st daughter nuclides
+		NBf = eD(hL[1], N0[1], tf) + (L[0]*N0[0]*(math.exp(-L[0]*tf) - math.exp(-L[1]*tf)))/(L[1]-L[0])
 
-#Computes final number of stable (2nd daughter) nuclides	
-	NCf = N0[2] + N0[1]*(1 - math.exp(-L[1]*tf)) + (L[1]*(1 - math.exp(-L[0]*tf)) - L[0]*(1 - math.exp(-L[1]*tf)))*(N0[0]/(L[1]-L[0]))
+		#Computes final number of stable (2nd daughter) nuclides	
+		NCf = N0[2] + N0[1]*(1 - math.exp(-L[1]*tf)) + (L[1]*(1 - math.exp(-L[0]*tf)) - L[0]*(1 - math.exp(-L[1]*tf)))*(N0[0]/(L[1]-L[0]))
 
-	return [int(NAf), int(NBf), int(NCf)]
+		return [round(NAf), round(NBf), round(NCf)]
 
-#End of analySoln function
+#End of aSol function
