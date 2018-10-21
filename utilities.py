@@ -22,7 +22,7 @@ def expDecay(tH, N0, tf):
 
 #end of expDecay module
 
-def lambda(halfLife):
+def decayConst(halfLife):
 	"""Converts array of half-lives to array of decay constants.
 	Args:
 		halfLife:	list of half lives
@@ -31,7 +31,7 @@ def lambda(halfLife):
 	Index in array is number of daughter nuclide where 0 is parent nuclide.
 	"""
 
-	k = [math.log(2)/halfLife[i] for i in range(0, halfLife.len()]
+	k = [math.log(2)/halfLife[i] for i in range(0, len(halfLife))]
 	return k
 
 #end of lambda module	 
