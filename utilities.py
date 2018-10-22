@@ -28,9 +28,12 @@ def decayConst(halfLife):
 	Returns:
 		a:		list of decay constants
 	Index in array is number of daughter nuclide where 0 is parent nuclide.
+	Returns 0 if it finds the half-life of a stable nuclide (0 hrs) in the argument list.
 	"""
-
-	k = [math.log(2)/halfLife[i] for i in range(0, len(halfLife))]
-	return k
+	if 0 in halfLife:
+		return 0
+	else:
+		k = [math.log(2)/halfLife[i] for i in range(0, len(halfLife))]
+		return k
 
 #end of decay constant function	 
