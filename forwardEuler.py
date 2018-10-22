@@ -10,7 +10,7 @@ from utilities import expDecay as eD
 from utilities import decayConst as dC
 
 
-def fwdEu(tf=0, dt=0, i=0, L-[], N0=[], f()):
+def fwdEu(tf, dt, i, L, N0):
 	"""
 	First Order ODE solver function using Forward Eurler's method for numerical solution
 
@@ -19,6 +19,14 @@ def fwdEu(tf=0, dt=0, i=0, L-[], N0=[], f()):
 	"""
 	if dt <= 0:
 		return [0]
+
+	if i==0:
+		f = NA
+	else if i==1:
+		f = NB
+	else:
+		f = NC
+
 	atoms = [] 
 	L = dC(hL)
 	n = round(tf/dt)
