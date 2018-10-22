@@ -6,32 +6,32 @@
 # Imports
 import math
 import numpy as np
-import matplotlib 
-import pyplot as plt
 from utilities import expDecay as eD
 from utilities import decayConst as dC
 
 
-def fwdEu(f, tf, hL, N0, dt, i):
+def fwdEu(tf=0, dt=0, i=0, L-[], N0=[], f()):
 	"""
 	First Order ODE solver function using Forward Eurler's method for numerical solution
 
 	Args:
 		
 	"""
+	if dt <= 0:
+		return [0]
 	atoms = [] 
 	L = dC(hL)
-	n = tf/dt
+	n = round(tf/dt)
 	y = N0[i]
 	x = 0
 	for j in range(n):
 		y += dt * f(L, N0, x)
 		atoms.append(y)
-		x += dt * n
+		x += dt * (n+1)
 	return atoms
 # end of Forward Euler's method
 
-def NA(L, N0, x):
+def NA(L=[], N0=[], x=0):
 	"""
 	First Order ODE function for parent nuclide decay
 	
@@ -46,7 +46,7 @@ def NA(L, N0, x):
 	return round(-L[0] * eD(L[0], N0[0], x))
 # end of parent function
 
-def NB(L, N0, x):
+def NB(L=[] N0=[], x=0):
 	"""
         First Order ODE function for 1st daughter 
 	nuclide decay/production
@@ -64,7 +64,7 @@ def NB(L, N0, x):
 	return round(a+b)
 # end of first daughter function
 
-def NC(L, N0, x):
+def NC(L=[], N0=[], x=0):
 	"""
         First Order ODE function for 2nd daughter 
 	(stable) nuclide production
