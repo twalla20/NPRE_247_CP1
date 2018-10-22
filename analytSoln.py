@@ -44,10 +44,10 @@ def aSol(hL, N0, tf):
 		L = dC(hL)
 	
 		#Computes final number of parent nuclides
-		NAf = eD(hL[0], N0[0], tf)
+		NAf = eD(L[0], N0[0], tf)
  
 		#Computes final number of 1st daughter nuclides
-		NBf = eD(hL[1], N0[1], tf) + (L[0]*N0[0]*(math.exp(-L[0]*tf) - math.exp(-L[1]*tf)))/(L[1]-L[0])
+		NBf = eD(L[1], N0[1], tf) + (L[0]*N0[0]*(math.exp(-L[0]*tf) - math.exp(-L[1]*tf)))/(L[1]-L[0])
 
 		#Computes final number of stable (2nd daughter) nuclides	
 		NCf = N0[2] + N0[1]*(1 - math.exp(-L[1]*tf)) + (L[1]*(1 - math.exp(-L[0]*tf)) - L[0]*(1 - math.exp(-L[1]*tf)))*(N0[0]/(L[1]-L[0]))
