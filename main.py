@@ -12,17 +12,26 @@ from forwardEuler import fwdEu
 from forwardEuler import NA
 from forwardEuler import NB
 from forwardEuler import NC
-fromm analytSol import aSol
+from analytSoln import aSol
 
 def solver(dt):
 	"""
 	Solves Three componemt decay chain analytically and numerically.
-	Plots results and writes them to results file
-	param = open("params.txt", "r")
-        hL = [param.readline(1), param.readline(2), param.readline(3)]
-        N0 = [param.readline(4), param.readline(5), param.readline(6)]
-        tf = param.readline(7)
-        param.close()
+	Plots results and writes them to results.txt
+	"""	
+
+	hL = []
+	N0 = []
+	x = []
+	file_in = open('parameters.txt', 'r')
+	for y in file_in.read().split('\n'):
+		if y.isdigit():
+			hL.append(float(y))
+        for y in file_in.read().split('\n'):
+                if y.isdigit():
+                        hL.append(float(y))
+	tf = int(param.readline(7))
+	param.close()
 	
 	N0A = N0.copy()
 	rNA = fwdEu(tf, dt, 0, hL, N0A)
@@ -31,7 +40,11 @@ def solver(dt):
 	N0C = N0.copy()
 	rBC = fwdEu(tf, dt, 2, hL, N0C)
 
-	
+	t = np.arange(0,50,dt)
+	plt.plot(t, rNA)
+	plt.plot(t, rNB)
+	plt.plot(t, rNC)
+	plt.show()
 
-
+#end
 
